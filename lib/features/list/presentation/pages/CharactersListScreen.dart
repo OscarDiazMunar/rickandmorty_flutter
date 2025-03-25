@@ -37,6 +37,9 @@ class _CharactersListPageState extends State<CharactersListPage> {
 
   late final PagingController<int, CharacterDTO> _pagingController;
 
+  String _searchQuery = "";
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
 
@@ -45,7 +48,7 @@ class _CharactersListPageState extends State<CharactersListPage> {
     );
 
     _pagingController.addPageRequestListener((pageKey) {
-      callCharacters(pageKey);
+      callCharacters(pageKey, _searchQuery);
     });
 
     super.initState();
@@ -62,7 +65,24 @@ class _CharactersListPageState extends State<CharactersListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Character Grid')),
+      appBar: AppBar(
+          title: Text('Rick and Morty Characters'),
+              bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(56),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: _onSearchChanged,
+                      decoration: const InputDecoration(
+                        hintText: "Search...",
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                  ),
+              ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Expanded(
@@ -122,8 +142,13 @@ class _CharactersListPageState extends State<CharactersListPage> {
     );
   }
 
-  callCharacters(int page) {
-    _bloc.add(GetCharactersEvent(page),);
+  callCharacters(int page, String searchQuery) {
+    _bloc.add(GetCharactersEvent(page, searchQuery),);
+  }
+
+  void _onSearchChanged(String query) {
+    _searchQuery = query;
+    _pagingController.refresh();
   }
 }
 

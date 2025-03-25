@@ -23,7 +23,10 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     result.fold((ifLeft) {
       emit(CharactersError(ifLeft.errorMessage));
     }, (ifRight) async {
-      emit(CharactersSuccess(ifRight));
+      final filteredItems = event.searchQuery.isEmpty
+          ? ifRight
+          : ifRight.where((element) => element.name.toLowerCase().contains(event.searchQuery.toLowerCase())).toList();
+      emit(CharactersSuccess(filteredItems));
     });
   }
 }

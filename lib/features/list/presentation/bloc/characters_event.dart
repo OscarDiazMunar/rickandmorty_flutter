@@ -4,6 +4,7 @@ sealed class CharactersEvent {}
 
 class GetCharactersEvent extends CharactersEvent {
   final int page;
+  final String searchQuery;
 
-  GetCharactersEvent(this.page);
+  GetCharactersEvent(this.page, this.searchQuery);
 }
