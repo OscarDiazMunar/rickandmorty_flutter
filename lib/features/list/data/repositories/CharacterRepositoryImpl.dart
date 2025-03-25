@@ -12,9 +12,9 @@ class CharacterRepositoryImpl extends AbstractCharacterRepository {
   CharacterRepositoryImpl(this.allCharacteresApiImpl);
 
   @override
-  Future<Either<Failure, List<CharacterDTO>>> getAllCharacters() async {
+  Future<Either<Failure, List<CharacterDTO>>> getAllCharacters(int page) async {
     try {
-      final response = await allCharacteresApiImpl.getAllCharacters();
+      final response = await allCharacteresApiImpl.getAllCharacters(page);
       return Right(response.results ?? []);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));

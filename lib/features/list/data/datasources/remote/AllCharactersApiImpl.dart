@@ -12,9 +12,14 @@ class AllCharactersApiImpl extends AbstractApiService {
   AllCharactersApiImpl(this.dio);
 
   @override
-  Future<ApiResponse<List<CharacterDTO>>> getAllCharacters() async {
+  Future<ApiResponse<List<CharacterDTO>>> getAllCharacters(int page) async {
     try {
-      final response = await dio.get("/character");
+      final response = await dio.get(
+          "/character",
+        queryParameters: {
+          "page": page
+        }
+      );
       if (response.data == null) {
         throw ServerException("UnknownError", response.statusCode);
       }

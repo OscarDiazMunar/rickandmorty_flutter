@@ -2,5 +2,5 @@ import 'package:rickandmorty_app/features/list/data/datasources/remote/models/Ap
 import 'package:rickandmorty_app/features/list/data/datasources/remote/models/CharacterDTO.dart';
 
 abstract class AbstractApiService {
-  Future<ApiResponse<List<CharacterDTO>>> getAllCharacters();
+  Future<ApiResponse<List<CharacterDTO>>> getAllCharacters(int page);
 }

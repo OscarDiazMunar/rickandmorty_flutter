@@ -18,7 +18,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
     if (state is CharactersLoading) return;
 
-    final result = await charactersUseCase.execute(NoParams());
+    final result = await charactersUseCase.execute(event.page);
 
     result.fold((ifLeft) {
       emit(CharactersError(ifLeft.errorMessage));
