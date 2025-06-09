@@ -31,4 +31,21 @@ class AllCharactersApiImpl extends AbstractApiService {
       throw ServerException(e.toString(), null);
     }
   }
+
+  @override
+  Future<ApiResponse<CharacterDTO>> getCharacterById(int id) async {
+    try {
+      final response = await dio.get(
+          "/character/$id"
+      );
+
+      if (response.data == null) {
+        throw ServerException("UnknownError", response.statusCode);
+      }
+    } on ServerException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(e.toString(), null);
+    }
+  }
 }

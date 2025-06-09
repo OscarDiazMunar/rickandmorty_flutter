@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:rickandmorty_app/core/utils/AppRoutes.dart';
 import 'package:rickandmorty_app/core/utils/injections.dart';
 import 'package:rickandmorty_app/features/list/data/datasources/remote/models/CharacterDTO.dart';
 
@@ -18,7 +19,8 @@ class CharactersListScreen extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CharactersListPage(),
+      initialRoute: AppRoutes.home,
+      onGenerateRoute: AppRoutesGenerator.generateRoute,
     );
   }
 }
@@ -112,25 +114,32 @@ class _CharactersListPageState extends State<CharactersListPage> {
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             elevation: 4,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                // Handle character tap
+                                print("Tapped on ${item.name}");
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.detail,
+                                  arguments: item.id,
+                                );
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
                                     child: Image.network(
                                       item.image,
-                                      fit: BoxFit.contain,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  item.name,
-                                  style: TextStyle(fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                                  SizedBox(height: 8),
+                                  Text(
+                                    item.name,
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         }
