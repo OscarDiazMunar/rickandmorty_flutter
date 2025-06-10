@@ -6,7 +6,7 @@ import 'package:rickandmorty_app/core/utils/injections.dart';
 import 'package:rickandmorty_app/features/list/data/datasources/remote/models/CharacterDTO.dart';
 
 import '../../domain/usecases/CharactersUseCase.dart';
-import '../bloc/characters_bloc.dart';
+import '../bloc/list/characters_bloc.dart';
 
 class CharactersListScreen extends StatelessWidget {
   const CharactersListScreen({super.key});

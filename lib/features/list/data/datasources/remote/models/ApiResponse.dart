@@ -9,8 +9,9 @@ class ApiResponse<T> {
   });
 
   static fromJson<T> (Map<dynamic, dynamic> json, Function tFromJson) {
+    final payload = json.containsKey('results') ? json['results'] : json;
     return ApiResponse<T>(
-      results: tFromJson(json['results']),
+      results: tFromJson(payload),
     );
   }
 

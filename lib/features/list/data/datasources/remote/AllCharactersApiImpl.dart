@@ -42,6 +42,7 @@ class AllCharactersApiImpl extends AbstractApiService {
       if (response.data == null) {
         throw ServerException("UnknownError", response.statusCode);
       }
+      return ApiResponse.fromJson<CharacterDTO>(response.data, CharacterDTO.fromJson);
     } on ServerException {
       rethrow;
     } catch (e) {
