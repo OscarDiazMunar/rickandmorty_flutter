@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rickandmorty_app/features/list/domain/usecases/CharactersUseCase.dart';
 
-import '../../../../core/utils/usecase/BaseUseCase.dart';
-import '../../data/datasources/remote/models/CharacterDTO.dart';
+import '../../../data/datasources/remote/models/CharacterDTO.dart';
 
 part 'characters_event.dart';
 part 'characters_state.dart';

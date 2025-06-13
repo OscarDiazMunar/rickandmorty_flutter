@@ -16,4 +16,11 @@ class LocationDTO {
   factory LocationDTO.fromJson(Map<String, dynamic> json) => _$LocationDTOFromJson(json);
 
   Map<String, dynamic> toJson() => _$LocationDTOToJson(this);
+
+  factory LocationDTO.empty() {
+    return LocationDTO(
+      name: '',
+      url: '',
+    );
+  }
 }

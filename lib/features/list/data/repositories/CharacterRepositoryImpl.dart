@@ -22,4 +22,23 @@ class CharacterRepositoryImpl extends AbstractCharacterRepository {
       return Left(ServerFailure(e.toString(), null));
     }
   }
+
+  @override
+  Future<Either<Failure, CharacterDTO>> getCharacterById(int id) async {
+    try {
+      final response = await allCharacteresApiImpl.getCharacterById(id);
+
+      final dto = response.results;
+
+      if (dto == null) {
+        return Left(ServerFailure('No character found for id $id', null));
+      }
+
+      return Right(dto);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message, e.statusCode));
+    } catch (e) {
+      return Left(ServerFailure(e.toString(), null));
+    }
+  }
 }

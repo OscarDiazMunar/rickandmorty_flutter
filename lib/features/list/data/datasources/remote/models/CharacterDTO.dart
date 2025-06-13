@@ -57,4 +57,21 @@ class CharacterDTO {
 
     return false;
   }
+
+  factory CharacterDTO.empty() {
+    return CharacterDTO(
+      id: 0,
+      name: '',
+      status: '',
+      species: '',
+      type: '',
+      gender: '',
+      origin: OriginDTO.empty(),
+      location: LocationDTO.empty(),
+      image: '',
+      episode: const [],
+      url: '',
+      created: '',
+    );
+  }
 }

@@ -17,4 +17,11 @@ class OriginDTO {
 
   Map<String, dynamic> toJson() => _$OriginDTOToJson(this);
 
+  factory OriginDTO.empty() {
+    return OriginDTO(
+      name: '',
+      url: '',
+    );
+  }
+
 }
